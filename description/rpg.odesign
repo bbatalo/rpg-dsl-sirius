@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/description/style/1.1.0" name="rpg" version="7.0.0">
+  <ownedViewpoints name="rpg" modelFileExtension="rpg">
+    <ownedRepresentations xsi:type="description:DiagramDescription" name="RPG diagram" domainClass="rpg.RPG">
+      <metamodel href="rpg#/"/>
+      <defaultLayer name="Default">
+        <nodeMappings name="CharacterClassNode" semanticCandidatesExpression="feature:allClasses" domainClass="rpg.CharacterClass">
+          <style xsi:type="style:SquareDescription" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='yellow']"/>
+          </style>
+        </nodeMappings>
+      </defaultLayer>
+    </ownedRepresentations>
+  </ownedViewpoints>
+</description:Group>
