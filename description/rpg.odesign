@@ -5,6 +5,13 @@
       <metamodel href="rpg#/"/>
       <defaultLayer name="Default">
         <containerMappings name="CharacterClassContainer" semanticCandidatesExpression="feature:allClasses" domainClass="rpg.CharacterClass" childrenPresentation="List">
+          <subNodeMappings name="CharacterStatistic" semanticCandidatesExpression="feature:statistics" domainClass="rpg.CharacterStatistic">
+            <style xsi:type="style:SquareDescription" labelAlignment="LEFT" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </subNodeMappings>
           <style xsi:type="style:FlatContainerStyleDescription" labelSize="12">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
