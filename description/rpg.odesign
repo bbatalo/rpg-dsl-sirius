@@ -27,6 +27,14 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
+        <edgeMappings name="ChildNode" sourceMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@nodeMappings[name='NodeNode']" targetMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@nodeMappings[name='NodeNode']" targetFinderExpression="feature:childNodes">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
         <containerMappings name="CharacterClassContainer" semanticCandidatesExpression="feature:allClasses" domainClass="rpg.CharacterClass" childrenPresentation="List">
           <borderedNodeMappings name="BranchNode" semanticCandidatesExpression="feature:branches" domainClass="rpg.Branch">
             <style xsi:type="style:SquareDescription" sizeComputationExpression="5" labelPosition="node" resizeKind="NSEW" width="15" height="4">
@@ -109,6 +117,17 @@
             <initialOperation>
               <firstModelOperations xsi:type="tool:ChangeContext">
                 <subModelOperations xsi:type="tool:SetValue" featureName="startNodes" valueExpression="var:target"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="ChildNode Creation" edgeMappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@edgeMappings[name='ChildNode']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool:SetValue" featureName="childNodes" valueExpression="var:target"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
