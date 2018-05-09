@@ -28,23 +28,7 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
-        <edgeMappings name="ActivationCost Edge" sourceMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@containerMappings[name='Node']/@subContainerMappings[name='ActivationBuy']/@subNodeMappings[name='ActivationCost']" targetMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@containerMappings[name='CharacterClassContainer']/@subNodeMappings[name='CharacterStatisticNode']" targetFinderExpression="feature:statistic">
-          <style sizeComputationExpression="2">
-            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
-            <centerLabelStyleDescription>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            </centerLabelStyleDescription>
-          </style>
-        </edgeMappings>
-        <edgeMappings name="ActivationPropagate Edge" sourceMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@containerMappings[name='Node']/@subContainerMappings[name='ActivationPropagate']" targetMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@containerMappings[name='Node']" targetFinderExpression="feature:followsActivationOf">
-          <style sizeComputationExpression="2">
-            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
-            <centerLabelStyleDescription>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            </centerLabelStyleDescription>
-          </style>
-        </edgeMappings>
-        <containerMappings name="CharacterClassContainer" semanticCandidatesExpression="feature:allClasses" domainClass="rpg.CharacterClass">
+        <containerMappings name="CharacterClassContainer" semanticCandidatesExpression="feature:allClasses" domainClass="rpg.CharacterClass" childrenPresentation="List">
           <borderedNodeMappings name="BranchNode" semanticCandidatesExpression="feature:branches" domainClass="rpg.Branch">
             <style xsi:type="style:SquareDescription" sizeComputationExpression="5" labelPosition="node" resizeKind="NSEW" width="15" height="4">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -66,30 +50,28 @@
             <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
           </style>
         </containerMappings>
-        <containerMappings name="Node" domainClass="rpg.Node">
-          <subContainerMappings name="ActivationBuy" semanticCandidatesExpression="feature:activation" domainClass="rpg.NodeActivationBuy">
-            <subNodeMappings name="ActivationCost" semanticCandidatesExpression="feature:costs" domainClass="rpg.ActivationCost">
-              <style xsi:type="style:LozengeNodeDescription" labelExpression="feature:cost" resizeKind="NSEW">
-                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
-              </style>
-            </subNodeMappings>
-            <style xsi:type="style:FlatContainerStyleDescription" labelExpression="feature:text">
+        <containerMappings name="Node" domainClass="rpg.Node" childrenPresentation="List">
+          <borderedNodeMappings name="Ability" semanticCandidatesExpression="feature:abilities" doubleClickDescription="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@toolSections.1/@ownedTools[name='abilityDoubleClick']" domainClass="rpg.Ability">
+            <style xsi:type="style:EllipseNodeDescription" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_red']"/>
             </style>
-          </subContainerMappings>
-          <subContainerMappings name="ActivationPropagate" semanticCandidatesExpression="feature:activation" domainClass="rpg.NodeActivationPropagate" childrenPresentation="List">
-            <style xsi:type="style:FlatContainerStyleDescription" labelExpression="feature:text">
+          </borderedNodeMappings>
+          <subNodeMappings name="ActivationBuy" semanticCandidatesExpression="feature:activation" domainClass="rpg.NodeActivationBuy">
+            <style xsi:type="style:LozengeNodeDescription" labelExpression="feature:text" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
             </style>
-          </subContainerMappings>
+          </subNodeMappings>
+          <subNodeMappings name="ActivationPropagate" semanticCandidatesExpression="feature:activation" domainClass="rpg.NodeActivationPropagate">
+            <style xsi:type="style:LozengeNodeDescription" labelFormat="italic" labelExpression="feature:text" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            </style>
+          </subNodeMappings>
           <style xsi:type="style:FlatContainerStyleDescription" backgroundStyle="Liquid">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -171,25 +153,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ContainerCreationDescription" name="ActivationBuy Creation" containerMappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@containerMappings[name='Node']/@subContainerMappings[name='ActivationBuy']">
-            <variable name="container"/>
-            <viewVariable name="containerView"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool:CreateInstance" typeName="rpg.NodeActivationBuy" referenceName="activation"/>
-              </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
-          <ownedTools xsi:type="tool:ContainerCreationDescription" name="ActivationPropagate Creation" containerMappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@containerMappings[name='Node']/@subContainerMappings[name='ActivationPropagate']">
-            <variable name="container"/>
-            <viewVariable name="containerView"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool:CreateInstance" typeName="rpg.NodeActivationPropagate" referenceName="activation"/>
-              </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="ActivationCost Creation" nodeMappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@containerMappings[name='Node']/@subContainerMappings[name='ActivationBuy']/@subNodeMappings[name='ActivationCost']">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="ActivationCost Creation">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -198,25 +162,116 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:EdgeCreationDescription" name="ActivationCostEdge Creation" edgeMappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@edgeMappings[name='ActivationCost%20Edge']">
-            <sourceVariable name="source"/>
-            <targetVariable name="target"/>
-            <sourceViewVariable name="sourceView"/>
-            <targetViewVariable name="targetView"/>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="ActivationBuy Creation" nodeMappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@containerMappings[name='Node']/@subNodeMappings[name='ActivationBuy']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
-                <subModelOperations xsi:type="tool:SetValue" featureName="statistic" valueExpression="var:target"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="rpg.NodeActivationBuy" referenceName="activation"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:EdgeCreationDescription" name="ActivationPropagateEdge Creation" edgeMappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@edgeMappings[name='ActivationPropagate%20Edge']">
-            <sourceVariable name="source"/>
-            <targetVariable name="target"/>
-            <sourceViewVariable name="sourceView"/>
-            <targetViewVariable name="targetView"/>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="ActivationPropagate Creation" nodeMappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@containerMappings[name='Node']/@subNodeMappings[name='ActivationPropagate']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
-                <subModelOperations xsi:type="tool:SetValue" featureName="followsActivationOf" valueExpression="var:target"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="rpg.NodeActivationPropagate" referenceName="activation"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="Ability Creation" nodeMappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@containerMappings[name='Node']/@borderedNodeMappings[name='Ability']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="rpg.Ability" referenceName="abilities"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:DoubleClickDescription" name="abilityDoubleClick" mappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@containerMappings[name='Node']/@borderedNodeMappings[name='Ability']">
+            <element name="element"/>
+            <elementView name="elementView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:Navigation" createIfNotExistent="true" diagramDescription="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Ability%20diagram']"/>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+      </defaultLayer>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description:DiagramDescription" name="Ability diagram" domainClass="rpg.Ability">
+      <defaultLayer name="Default">
+        <edgeMappings name="Effect Edge" sourceMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Ability%20diagram']/@defaultLayer/@containerMappings[name='Ability']" targetMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Ability%20diagram']/@defaultLayer/@containerMappings[name='Effect']" targetFinderExpression="feature:effects">
+          <style sourceArrow="OutputFillClosedArrow" targetArrow="InputArrowWithFillDiamond" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <containerMappings name="Ability" semanticCandidatesExpression="var:self" domainClass="rpg.Ability" childrenPresentation="List">
+          <subNodeMappings name="AbilityCost" semanticCandidatesExpression="feature:costs" domainClass="rpg.AbilityCost">
+            <style xsi:type="style:LozengeNodeDescription" labelExpression="feature:cost" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            </style>
+          </subNodeMappings>
+          <style xsi:type="style:FlatContainerStyleDescription">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_red']"/>
+          </style>
+        </containerMappings>
+        <containerMappings name="Effect" semanticCandidatesExpression="feature:effects" domainClass="rpg.Effect">
+          <subContainerMappings name="StatChange" semanticCandidatesExpression="feature:statChange" domainClass="rpg.StatChange" childrenPresentation="List">
+            <subNodeMappings name="Modifier" semanticCandidatesExpression="feature:modifiers" domainClass="rpg.Modifier">
+              <style xsi:type="style:LozengeNodeDescription" labelExpression="feature:changeType" resizeKind="NSEW">
+                <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+                <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+              </style>
+            </subNodeMappings>
+            <style xsi:type="style:FlatContainerStyleDescription" labelExpression="feature:changeType">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+              <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_yellow']"/>
+            </style>
+          </subContainerMappings>
+          <style xsi:type="style:FlatContainerStyleDescription">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_purple']"/>
+          </style>
+        </containerMappings>
+        <toolSections name="Ability Tools">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Effect Creation" containerMappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Ability%20diagram']/@defaultLayer/@containerMappings[name='Effect']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="rpg.Effect" referenceName="effects"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="StatChange Creation" containerMappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Ability%20diagram']/@defaultLayer/@containerMappings[name='Effect']/@subContainerMappings[name='StatChange']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="rpg.StatChange" referenceName="statChange"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="Modifier Creation" nodeMappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Ability%20diagram']/@defaultLayer/@containerMappings[name='Effect']/@subContainerMappings[name='StatChange']/@subNodeMappings[name='Modifier']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="rpg.Modifier" referenceName="modifiers"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
