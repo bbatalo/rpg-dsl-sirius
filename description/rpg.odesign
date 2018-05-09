@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/description/style/1.1.0" name="rpg" version="7.0.0">
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/description/tool/1.1.0" name="rpg" version="7.0.0">
   <ownedViewpoints name="rpg" modelFileExtension="rpg">
     <ownedRepresentations xsi:type="description:DiagramDescription" name="RPG diagram" domainClass="rpg.RPG">
       <metamodel href="rpg#/"/>
       <defaultLayer name="Default">
+        <nodeMappings name="NodeNode" domainClass="rpg.Node">
+          <style xsi:type="style:EllipseNodeDescription" sizeComputationExpression="5" labelPosition="node" resizeKind="NSEW" horizontalDiameterComputationExpression="12" verticalDiameterComputationExpression="3">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_yellow']"/>
+          </style>
+        </nodeMappings>
+        <edgeMappings name="ClassInheritanceEdge" sourceMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@containerMappings[name='CharacterClassContainer']" targetMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@containerMappings[name='CharacterClassContainer']" targetFinderExpression="feature:parentClasses">
+          <style targetArrow="InputClosedArrow" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
         <containerMappings name="CharacterClassContainer" semanticCandidatesExpression="feature:allClasses" domainClass="rpg.CharacterClass" childrenPresentation="List">
-          <subNodeMappings name="CharacterStatistic" semanticCandidatesExpression="feature:statistics" domainClass="rpg.CharacterStatistic">
+          <borderedNodeMappings name="BranchNode" semanticCandidatesExpression="feature:branches" domainClass="rpg.Branch">
+            <style xsi:type="style:SquareDescription" sizeComputationExpression="5" labelPosition="node" resizeKind="NSEW" width="15" height="4">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </borderedNodeMappings>
+          <subNodeMappings name="CharacterStatisticNode" semanticCandidatesExpression="feature:statistics" domainClass="rpg.CharacterStatistic">
             <style xsi:type="style:SquareDescription" labelAlignment="LEFT" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -19,6 +41,37 @@
             <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
           </style>
         </containerMappings>
+        <toolSections name="Class Based Tools">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="CharacterClass Creation" containerMappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@containerMappings[name='CharacterClassContainer']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="rpg.CharacterClass" referenceName="allClasses"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="CharacterStatistic Creation" nodeMappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@containerMappings[name='CharacterClassContainer']/@subNodeMappings[name='CharacterStatisticNode']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="rpg.CharacterStatistic" referenceName="statistics"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="Inheritance" edgeMappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@edgeMappings[name='ClassInheritanceEdge']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool:SetValue" featureName="parentClasses" valueExpression="var:target"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
       </defaultLayer>
     </ownedRepresentations>
   </ownedViewpoints>
