@@ -12,7 +12,7 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
-        <containerMappings name="CharacterClassContainer" deletionDescription="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@toolSections.0/@ownedTools[name='CharacterClass%20Deletion']" semanticCandidatesExpression="feature:allClasses" domainClass="rpg.CharacterClass" childrenPresentation="List">
+        <containerMappings name="CharacterClassContainer" semanticCandidatesExpression="feature:allClasses" domainClass="rpg.CharacterClass" childrenPresentation="List">
           <subNodeMappings name="CharacterStatisticNode" semanticCandidatesExpression="feature:statistics" domainClass="rpg.CharacterStatistic">
             <style xsi:type="style:SquareDescription" labelAlignment="LEFT" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -37,16 +37,6 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:DeleteElementDescription" name="CharacterClass Deletion">
-            <element name="element"/>
-            <elementView name="elementView"/>
-            <containerView name="containerView"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool:RemoveElement">
-                <subModelOperations xsi:type="tool:DeleteView"/>
-              </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
           <ownedTools xsi:type="tool:EdgeCreationDescription" name="Inheritance" edgeMappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@edgeMappings[name='ClassInheritanceEdge']">
             <sourceVariable name="source"/>
             <targetVariable name="target"/>
@@ -57,11 +47,6 @@
                 <subModelOperations xsi:type="tool:SetValue" featureName="parentClasses" valueExpression="var:target"/>
               </firstModelOperations>
             </initialOperation>
-          </ownedTools>
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="adfasdf" nodeMappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Ability%20diagram']/@defaultLayer/@containerMappings[name='Effect']/@subContainerMappings[name='StatChange']/@subNodeMappings[name='Modifier']">
-            <variable name="container"/>
-            <viewVariable name="containerView"/>
-            <initialOperation/>
           </ownedTools>
         </toolSections>
       </defaultLayer>
