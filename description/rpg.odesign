@@ -140,11 +140,11 @@
             </style>
           </conditionnalStyles>
         </nodeMappings>
-        <nodeMappings name="NodeActivation" semanticCandidatesExpression="[self.nodes.activation/]" domainClass="rpg.NodeActivation">
-          <style xsi:type="style:LozengeNodeDescription" showIcon="false" labelExpression="feature:level" sizeComputationExpression="4" labelPosition="node" resizeKind="NSEW">
+        <nodeMappings name="Ability" semanticCandidatesExpression="ocl:self.nodes.abilities" domainClass="rpg.Ability">
+          <style xsi:type="style:SquareDescription" showIcon="false" labelPosition="node" resizeKind="NSEW" width="12" height="3">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_orange']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_yellow']"/>
           </style>
         </nodeMappings>
         <edgeMappings name="NodeEdge" sourceMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Branch%20Diagram']/@defaultLayer/@nodeMappings[name='Node']" targetMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Branch%20Diagram']/@defaultLayer/@nodeMappings[name='Node']" targetFinderExpression="ocl:self.childNodes">
@@ -155,8 +155,16 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
-        <edgeMappings name="NodeActivationEdge" sourceMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Branch%20Diagram']/@defaultLayer/@nodeMappings[name='Node']" targetMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Branch%20Diagram']/@defaultLayer/@nodeMappings[name='NodeActivation']" targetFinderExpression="ocl:self.activation">
-          <style sizeComputationExpression="2">
+        <edgeMappings name="NodeActivationEdge" sourceMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Branch%20Diagram']/@defaultLayer/@nodeMappings[name='Node']" targetMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Branch%20Diagram']/@additionalLayers[name='NodeActivations']/@nodeMappings[name='NodeActivation']" targetFinderExpression="ocl:self.activation">
+          <style lineStyle="dash" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="AbilityEdge" sourceMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Branch%20Diagram']/@defaultLayer/@nodeMappings[name='Node']" targetMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Branch%20Diagram']/@defaultLayer/@nodeMappings[name='Ability']" targetFinderExpression="ocl:self.abilities">
+          <style lineStyle="dash_dot" sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
             <centerLabelStyleDescription>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -177,6 +185,46 @@
           </ownedTools>
         </toolSections>
       </defaultLayer>
+      <additionalLayers name="NodeActivations" activeByDefault="true">
+        <nodeMappings name="NodeActivation" semanticCandidatesExpression="[self.nodes.activation/]" domainClass="rpg.NodeActivation">
+          <style xsi:type="style:LozengeNodeDescription" showIcon="false" labelExpression="feature:level" tooltipExpression="ocl:" sizeComputationExpression="4" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_orange']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="ActivationCost" semanticCandidatesExpression="[self.nodes.activation.costs/]" domainClass="rpg.ActivationCost">
+          <style xsi:type="style:DotDescription" labelExpression="ocl:if self.consume then 'Consumes:' else 'Requires:' endif + ' ' + self.cost.toString() + ' ' + self.statistic.name" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="PropagationRequirement" semanticCandidatesExpression="ocl:self.nodes.activation.requirements" domainClass="rpg.PropagationRequirement">
+          <style xsi:type="style:DotDescription" labelExpression="ocl:self.followsActivationOf.name + ' ' + self.requiredLevel.toString()" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_red']"/>
+          </style>
+        </nodeMappings>
+        <edgeMappings name="CostEdge" sourceMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Branch%20Diagram']/@additionalLayers[name='NodeActivations']/@nodeMappings[name='NodeActivation']" targetMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Branch%20Diagram']/@additionalLayers[name='NodeActivations']/@nodeMappings[name='ActivationCost']" targetFinderExpression="ocl:costs">
+          <style lineStyle="dash" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="RequirementEdge" sourceMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Branch%20Diagram']/@additionalLayers[name='NodeActivations']/@nodeMappings[name='NodeActivation']" targetMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Branch%20Diagram']/@additionalLayers[name='NodeActivations']/@nodeMappings[name='PropagationRequirement']" targetFinderExpression="self.requirements">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+      </additionalLayers>
     </ownedRepresentations>
+    <ownedRepresentations xsi:type="description:DiagramDescription" name="Ability Diagram" domainClass="rpg.Ability"/>
   </ownedViewpoints>
 </description:Group>
