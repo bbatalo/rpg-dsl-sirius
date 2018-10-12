@@ -10,13 +10,6 @@
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='purple']"/>
           </style>
-          <conditionnalStyles predicateExpression="ocl:self.branchType = rpg::BranchType::TALENT">
-            <style xsi:type="style:SquareDescription" tooltipExpression="feature:description" labelPosition="node" resizeKind="NSEW" width="12" height="5">
-              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
-            </style>
-          </conditionnalStyles>
         </nodeMappings>
         <edgeMappings name="ClassInheritanceEdge" sourceMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@containerMappings[name='CharacterClassContainer']" targetMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@defaultLayer/@containerMappings[name='CharacterClassContainer']" targetFinderExpression="feature:parentClasses">
           <style targetArrow="InputClosedArrow" sizeComputationExpression="2">
@@ -89,7 +82,7 @@
         </toolSections>
       </defaultLayer>
       <additionalLayers name="RangeUnits" activeByDefault="true">
-        <nodeMappings name="RangeUnit" deletionDescription="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='RPG%20diagram']/@additionalLayers[name='RangeUnits']/@toolSections.0/@ownedTools[name='Delete%20RangeUnit']" domainClass="rpg.RangeUnit">
+        <nodeMappings name="RangeUnit" domainClass="rpg.RangeUnit">
           <style xsi:type="style:LozengeNodeDescription" tooltipExpression="feature:description" labelPosition="node" resizeKind="NSEW" widthComputationExpression="ocl:self.name.size() + 3" heightComputationExpression="3">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -104,14 +97,6 @@
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
                 <subModelOperations xsi:type="tool:CreateInstance" typeName="rpg.RangeUnit" referenceName="rangeUnits"/>
               </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
-          <ownedTools xsi:type="tool:DeleteElementDescription" name="Delete RangeUnit">
-            <element name="element"/>
-            <elementView name="elementView"/>
-            <containerView name="containerView"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool:RemoveElement"/>
             </initialOperation>
           </ownedTools>
         </toolSections>
@@ -133,14 +118,14 @@
             </style>
           </conditionnalStyles>
           <conditionnalStyles predicateExpression="ocl:self.nodeType = rpg::NodeType::STANDALONE">
-            <style xsi:type="style:DotDescription" borderSizeComputationExpression="ocl:" sizeComputationExpression="6" resizeKind="NSEW">
+            <style xsi:type="style:DotDescription" sizeComputationExpression="6" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_green']"/>
             </style>
           </conditionnalStyles>
         </nodeMappings>
-        <nodeMappings name="Ability" semanticCandidatesExpression="ocl:self.nodes.abilities" domainClass="rpg.Ability">
+        <nodeMappings name="Ability" semanticCandidatesExpression="ocl:self.nodes.abilities" doubleClickDescription="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Branch%20Diagram']/@defaultLayer/@toolSections.0/@ownedTools[name='AbilityDoubleClick']" domainClass="rpg.Ability">
           <style xsi:type="style:SquareDescription" showIcon="false" labelPosition="node" resizeKind="NSEW" width="12" height="3">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -181,6 +166,13 @@
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
                 <subModelOperations xsi:type="tool:SetValue" featureName="childNodes" valueExpression="var:target"/>
               </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:DoubleClickDescription" name="AbilityDoubleClick" mappings="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Branch%20Diagram']/@defaultLayer/@nodeMappings[name='Ability']">
+            <element name="element"/>
+            <elementView name="elementView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:Navigation" createIfNotExistent="true" diagramDescription="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Ability%20Diagram']"/>
             </initialOperation>
           </ownedTools>
         </toolSections>
@@ -225,6 +217,53 @@
         </edgeMappings>
       </additionalLayers>
     </ownedRepresentations>
-    <ownedRepresentations xsi:type="description:DiagramDescription" name="Ability Diagram" domainClass="rpg.Ability"/>
+    <ownedRepresentations xsi:type="description:DiagramDescription" name="Ability Diagram" domainClass="rpg.Ability">
+      <defaultLayer name="Default">
+        <nodeMappings name="Effect" semanticCandidatesExpression="ocl:self.effects" domainClass="rpg.Effect">
+          <style xsi:type="style:SquareDescription" labelExpression="ocl:self.name + ' on level ' + self.onLevel.toString()" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_red']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="Randomizer" semanticCandidatesExpression="ocl:self.effects.randomizer" domainClass="rpg.Randomizer">
+          <style xsi:type="style:EllipseNodeDescription" labelExpression="ocl:if self.value > 0 then 'Chance: ' + self.value.toString() + '%' else 'Chance by stat: ' + self.basedOn.startLimitValue.toString() + '%' endif" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="StatChange" semanticCandidatesExpression="ocl:self.effects.changes" domainClass="rpg.StatChange">
+          <style xsi:type="style:LozengeNodeDescription" labelExpression="ocl:self.changeType.toString() + '(' + self.changeValueType.toString() + ') on ' + self.changesStatistic.name" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_orange']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="CooldownChange" semanticCandidatesExpression="ocl:self.effects.changes" domainClass="rpg.CooldownChange">
+          <style xsi:type="style:LozengeNodeDescription" labelExpression="ocl:self.changeType.toString() + '(' + self.changeValueType.toString() + ')'" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_yellow']"/>
+          </style>
+        </nodeMappings>
+        <edgeMappings name="EffectRandomizerEdge" sourceMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Ability%20Diagram']/@defaultLayer/@nodeMappings[name='Effect']" targetMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Ability%20Diagram']/@defaultLayer/@nodeMappings[name='Randomizer']" targetFinderExpression="ocl:self.randomizer">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="StatChangeEdge" sourceMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Ability%20Diagram']/@defaultLayer/@nodeMappings[name='Effect']" targetMapping="//@ownedViewpoints[name='rpg']/@ownedRepresentations[name='Ability%20Diagram']/@defaultLayer/@nodeMappings[name='StatChange']" targetFinderExpression="ocl:self.changes">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+      </defaultLayer>
+    </ownedRepresentations>
   </ownedViewpoints>
 </description:Group>
